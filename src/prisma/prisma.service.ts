@@ -3,11 +3,12 @@ import 'dotenv/config';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
+import { DB_URL } from 'src/config/env';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
-    const adapter = new PrismaPg({ connectionString: process.env.DB_URL! });
+    const adapter = new PrismaPg({ connectionString: DB_URL! });
     super({ adapter });
   }
 
