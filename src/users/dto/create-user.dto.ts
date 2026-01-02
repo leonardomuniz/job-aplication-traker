@@ -22,5 +22,6 @@ export class CreateUserDto {
     example: 'test123',
   })
   @Length(4, 20, { message: 'Password must be between 4 and 20 characters' })
+  @IsString()
   public readonly password: string;
 }

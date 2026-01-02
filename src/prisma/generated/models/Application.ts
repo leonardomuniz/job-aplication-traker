@@ -209,7 +209,7 @@ export type ApplicationGroupByOutputType = {
   company: string
   status: $Enums.Status
   followUpStatus: $Enums.FollowUpStatus
-  userId: number | null
+  userId: number
   _count: ApplicationCountAggregateOutputType | null
   _avg: ApplicationAvgAggregateOutputType | null
   _sum: ApplicationSumAggregateOutputType | null
@@ -243,7 +243,7 @@ export type ApplicationWhereInput = {
   company?: Prisma.StringFilter<"Application"> | string
   status?: Prisma.EnumStatusFilter<"Application"> | $Enums.Status
   followUpStatus?: Prisma.EnumFollowUpStatusFilter<"Application"> | $Enums.FollowUpStatus
-  userId?: Prisma.IntNullableFilter<"Application"> | number | null
+  userId?: Prisma.IntFilter<"Application"> | number
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -255,12 +255,13 @@ export type ApplicationOrderByWithRelationInput = {
   company?: Prisma.SortOrder
   status?: Prisma.SortOrder
   followUpStatus?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  userId_link?: Prisma.ApplicationUserIdLinkCompoundUniqueInput
   AND?: Prisma.ApplicationWhereInput | Prisma.ApplicationWhereInput[]
   OR?: Prisma.ApplicationWhereInput[]
   NOT?: Prisma.ApplicationWhereInput | Prisma.ApplicationWhereInput[]
@@ -270,9 +271,9 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   company?: Prisma.StringFilter<"Application"> | string
   status?: Prisma.EnumStatusFilter<"Application"> | $Enums.Status
   followUpStatus?: Prisma.EnumFollowUpStatusFilter<"Application"> | $Enums.FollowUpStatus
-  userId?: Prisma.IntNullableFilter<"Application"> | number | null
+  userId?: Prisma.IntFilter<"Application"> | number
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id">
+}, "id" | "userId_link">
 
 export type ApplicationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -282,7 +283,7 @@ export type ApplicationOrderByWithAggregationInput = {
   company?: Prisma.SortOrder
   status?: Prisma.SortOrder
   followUpStatus?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
   _count?: Prisma.ApplicationCountOrderByAggregateInput
   _avg?: Prisma.ApplicationAvgOrderByAggregateInput
   _max?: Prisma.ApplicationMaxOrderByAggregateInput
@@ -301,7 +302,7 @@ export type ApplicationScalarWhereWithAggregatesInput = {
   company?: Prisma.StringWithAggregatesFilter<"Application"> | string
   status?: Prisma.EnumStatusWithAggregatesFilter<"Application"> | $Enums.Status
   followUpStatus?: Prisma.EnumFollowUpStatusWithAggregatesFilter<"Application"> | $Enums.FollowUpStatus
-  userId?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
+  userId?: Prisma.IntWithAggregatesFilter<"Application"> | number
 }
 
 export type ApplicationCreateInput = {
@@ -322,7 +323,7 @@ export type ApplicationUncheckedCreateInput = {
   company: string
   status?: $Enums.Status
   followUpStatus?: $Enums.FollowUpStatus
-  userId?: number | null
+  userId: number
 }
 
 export type ApplicationUpdateInput = {
@@ -343,7 +344,7 @@ export type ApplicationUncheckedUpdateInput = {
   company?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   followUpStatus?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
-  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ApplicationCreateManyInput = {
@@ -354,7 +355,7 @@ export type ApplicationCreateManyInput = {
   company: string
   status?: $Enums.Status
   followUpStatus?: $Enums.FollowUpStatus
-  userId?: number | null
+  userId: number
 }
 
 export type ApplicationUpdateManyMutationInput = {
@@ -374,7 +375,7 @@ export type ApplicationUncheckedUpdateManyInput = {
   company?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   followUpStatus?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
-  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ApplicationListRelationFilter = {
@@ -385,6 +386,11 @@ export type ApplicationListRelationFilter = {
 
 export type ApplicationOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ApplicationUserIdLinkCompoundUniqueInput = {
+  userId: number
+  link: string
 }
 
 export type ApplicationCountOrderByAggregateInput = {
@@ -480,14 +486,6 @@ export type EnumFollowUpStatusFieldUpdateOperationsInput = {
   set?: $Enums.FollowUpStatus
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ApplicationCreateWithoutUserInput = {
   title: string
   link: string
@@ -544,7 +542,7 @@ export type ApplicationScalarWhereInput = {
   company?: Prisma.StringFilter<"Application"> | string
   status?: Prisma.EnumStatusFilter<"Application"> | $Enums.Status
   followUpStatus?: Prisma.EnumFollowUpStatusFilter<"Application"> | $Enums.FollowUpStatus
-  userId?: Prisma.IntNullableFilter<"Application"> | number | null
+  userId?: Prisma.IntFilter<"Application"> | number
 }
 
 export type ApplicationCreateManyUserInput = {
@@ -659,7 +657,7 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     company: string
     status: $Enums.Status
     followUpStatus: $Enums.FollowUpStatus
-    userId: number | null
+    userId: number
   }, ExtArgs["result"]["application"]>
   composites: {}
 }

@@ -1,12 +1,12 @@
 import { Exclude } from 'class-transformer';
 
 export class UserEntity {
-  id: number;
-  email: string;
-  name: string;
+  public readonly id: number;
+  public readonly email: string;
+  public readonly name: string;
 
   @Exclude()
-  password?: string;
+  public readonly password?: string;
 
   constructor(partial: Partial<UserEntity>) {
     Object.assign(this, partial);

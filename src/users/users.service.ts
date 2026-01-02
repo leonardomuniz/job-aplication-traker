@@ -104,7 +104,7 @@ export class UsersService {
     }
   }
 
-  private async checkIfUserExists(id: number) {
+  public async checkIfUserExists(id: number) {
     const userExists = await this.prismaService.user.findUnique({
       where: { id },
       include: { applications: true },
@@ -132,7 +132,7 @@ export class UsersService {
 
     if (emailExists && emailExists.id !== userId) {
       Logger.error(
-        `${this.serviceName} :: checkIfEmailExists :: email founded`,
+        `${this.serviceName} :: checkIfEmailExists :: offer founded`,
       );
       throw new ConflictException(
         `User with email '${email}' ealready registered`,

@@ -33,7 +33,9 @@ model Application {
   status Status @default(APPLIED)
   followUpStatus FollowUpStatus @default(TO_DO)
   user User? @relation(fields: [userId], references: [id])
-  userId Int?
+  userId Int
+
+  @@unique([userId, link])
 }
 
 enum Status {
